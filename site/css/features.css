@@ -1,0 +1,234 @@
+/* Recruiter-facing features added 2026-10-17. Same sheet vocabulary as site.css:
+   issue stamp, dimensions, drawing notes, detail-view controls. */
+
+/* ---------- "Issued for" role stamp (hero) ---------- */
+
+.issue {
+  margin-top: 1.5rem;
+  padding-top: 0.8rem;
+  border-top: var(--lw) solid var(--rule);
+  animation: rise 1000ms var(--ease-out) both;
+  animation-delay: 560ms;
+}
+.issue__label { font-family: var(--font-letter); font-size: 0.9rem; color: var(--ink-2); }
+.issue__options { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.5rem; }
+.issue__option {
+  min-height: 38px;
+  padding: 0.25rem 0.8rem;
+  border: var(--lw) solid var(--rule);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.issue__option:hover { border-color: var(--ink); }
+.issue__option[aria-pressed='true'] {
+  border-color: var(--redline);
+  color: var(--redline);
+  box-shadow: inset 0 0 0 1px var(--redline);
+}
+
+.issue__stamp {
+  display: inline-block;
+  margin-top: 0.9rem;
+  padding: 0.25rem 0.65rem;
+  border: 2px solid var(--redline);
+  border-radius: 3px;
+  color: var(--redline);
+  font-family: var(--font-letter);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-2.5deg);
+  transform-origin: left center;
+}
+.issue__stamp[hidden] { display: none; }
+.issue__stamp.is-stamped { animation: stamp 420ms var(--ease-out) both; }
+@keyframes stamp {
+  from { opacity: 0; transform: rotate(-2.5deg) scale(1.5); }
+  60% { opacity: 1; transform: rotate(-2.5deg) scale(0.97); }
+  to { transform: rotate(-2.5deg) scale(1); }
+}
+
+.evidence {
+  margin: 0.8rem 0 0;
+  padding-left: 1.2rem;
+  max-width: 48ch;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+.evidence li + li { margin-top: 0.4rem; }
+.evidence li::marker { color: var(--redline); }
+
+.button--ghost {
+  border-color: transparent;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.2em;
+}
+.button--ghost:hover { background: none; color: var(--redline); text-decoration-color: currentColor; }
+
+/* ---------- Drive view controls (hero readout) ---------- */
+
+.drive__readout { grid-template-columns: repeat(3, minmax(0, 1fr)) auto; }
+.drive__view dd { display: flex; gap: 0.35rem; align-items: center; padding-top: 0.15rem; }
+.drive__toggle {
+  min-height: 28px;
+  padding: 0.1rem 0.55rem;
+  border: var(--lw) solid var(--rule);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.drive__toggle:hover { border-color: var(--ink); }
+.drive__toggle[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+
+/* ---------- Key figures as dimensions (about) ---------- */
+
+.dims {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.4rem 2.2rem;
+  margin: 2.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.dim { display: grid; gap: 0.4rem; }
+.dim__value {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-stretch: 118%;
+  font-weight: 260;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.dim__line { position: relative; height: 1px; margin: 0 1px; background: var(--ink); }
+.dim__line::before,
+.dim__line::after { content: ''; position: absolute; top: -4px; border: 4.5px solid transparent; }
+.dim__line::before { left: -1px; border-right: 9px solid var(--ink); border-left: 0; }
+.dim__line::after { right: -1px; border-left: 9px solid var(--ink); border-right: 0; }
+.dim__label { font-family: var(--font-letter); font-size: 0.85rem; color: var(--ink-2); }
+
+/* ---------- Role marks on the timeline and the bill of materials ---------- */
+
+.span.is-relevant .span__label::before { content: '△ '; color: var(--redline); font-size: 0.8em; }
+.bom tr.is-relevant .bom__part { box-shadow: inset 4px 0 0 var(--redline); }
+
+/* ---------- Project search ---------- */
+
+.find {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  max-width: 440px;
+  margin-top: 1.2rem;
+  border-bottom: var(--lw) solid var(--ink);
+}
+.find:focus-within { border-bottom-color: var(--redline); box-shadow: 0 1px 0 var(--redline); }
+.find label { font-family: var(--font-letter); color: var(--ink-2); white-space: nowrap; }
+.find input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.45rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+}
+.find input:focus-visible { outline: none; }
+.find input::placeholder { color: var(--ink-2); opacity: 0.7; }
+
+/* ---------- Card hover preview ---------- */
+
+.card__preview {
+  position: absolute;
+  inset: 7px;
+  width: calc(100% - 14px);
+  height: calc(100% - 14px);
+  object-fit: cover;
+  background: var(--paper-raised);
+}
+.card--portrait .card__preview { object-fit: contain; }
+
+/* ---------- Gallery navigation ---------- */
+
+.viewer__main { touch-action: pan-y; }
+.viewer__nav { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.6rem; }
+.viewer__count { font-family: var(--font-letter); font-size: 0.85rem; color: var(--ink-2); }
+
+/* ---------- Tour: drawing notes ---------- */
+
+.tour {
+  position: fixed;
+  left: calc(var(--frame-inset) + 16px);
+  bottom: calc(var(--frame-inset) + 16px);
+  z-index: 30;
+  width: min(380px, calc(100vw - 32px));
+  padding: 1rem 1.15rem 1.1rem;
+  border: var(--lw-thick) solid var(--ink);
+  border-left: 6px solid var(--redline);
+  background: var(--paper-raised);
+  box-shadow: 0 14px 36px rgba(10, 30, 55, 0.22);
+}
+.tour[hidden] { display: none; }
+.tour__step { font-family: var(--font-letter); font-size: 0.8rem; color: var(--ink-2); }
+.tour__title { margin-top: 0.2rem; font-size: var(--step-1); font-stretch: 110%; font-weight: 480; }
+.tour__title:focus-visible { outline: none; }
+.tour__text { margin-top: 0.5rem; color: var(--ink-2); font-size: var(--step--1); }
+.tour__actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+.tour__actions .button:disabled { opacity: 0.4; cursor: default; }
+
+.is-spotlit { outline: 3px solid var(--redline); outline-offset: 10px; scroll-margin: 96px 0; }
+.card.is-spotlit { outline-offset: 6px; }
+
+/* ---------- Reading progress along the frame ---------- */
+
+@supports (animation-timeline: scroll()) {
+  .sheet-frame::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--redline);
+    transform-origin: left;
+    transform: scaleX(0);
+    animation: progress linear both;
+    animation-timeline: scroll(root);
+  }
+  @keyframes progress { to { transform: scaleX(1); } }
+}
+
+/* ---------- Contact additions ---------- */
+
+.contact__email .button + .button { margin-left: 0; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+  .tour { left: 8px; right: 8px; bottom: 8px; width: auto; }
+}
+
+@media (max-width: 560px) {
+  .drive__readout { grid-template-columns: 1fr 1fr; }
+  .drive__readout div:nth-child(3) { border-left: 0; }
+  .drive__readout div:nth-child(n + 3) { border-top: var(--lw) solid var(--rule); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .issue__stamp.is-stamped { animation: none; }
+  .sheet-frame::before { animation: none; transform: none; display: none; }
+}
+
+@media print {
+  .issue,
+  .tour,
+  .find,
+  .drive__view { display: none; }
+}

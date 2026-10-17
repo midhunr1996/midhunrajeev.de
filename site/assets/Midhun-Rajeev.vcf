@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Rajeev;Midhun;;;
+FN:Midhun Rajeev
+TITLE:Robotics and embedded systems engineer
+EMAIL;TYPE=INTERNET:midhunr2013@gmail.com
+URL:https://midhunrajeev.de/
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/midhun-rajeev1060/
+URL;TYPE=GitHub:https://github.com/midhunr1996
+ADR;TYPE=WORK:;;;Landshut;Bavaria;;Germany
+NOTE:Robotics and embedded systems engineer in Landshut, Germany. Portfolio at https://midhunrajeev.de/
+END:VCARD

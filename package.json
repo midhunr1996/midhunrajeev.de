@@ -1,0 +1,20 @@
+{
+  "name": "midhun-rajeev-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Midhun Rajeev's interactive portfolio: a static site published to midhunrajeev.de from GitHub Pages, with a zero-dependency local server for preview.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "serve": "node server/server.mjs",
+    "start": "powershell -NoProfile -ExecutionPolicy Bypass -File start-site.ps1",
+    "test": "node --test \"server/*.test.mjs\" \"tests/*.test.mjs\""
+  },
+  "homepage": "https://midhunrajeev.de/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/midhunr1996/midhunrajeev.de.git"
+  }
+}

@@ -1,0 +1,17 @@
+# Local runtime
+node_modules/
+logs/
+PUBLIC_URL.txt
+.venv/
+
+# Tunnel client binary (55 MB); download from github.com/cloudflare/cloudflared/releases
+bin/
+
+# Source media and build scratch. The raw recordings may carry audio and private detail; only the
+# processed files in site/assets are public.
+scripts/raw/
+scripts/__pycache__/
+*.pyc
+
+# Private review notes for Midhun (claims still to confirm); not part of the public site
+CONTENT-REVIEW.md
