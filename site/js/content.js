@@ -4,7 +4,7 @@
 // Hero, about-photo and contact copy live in index.html so they read without JavaScript;
 // only the email is needed here (for the copy button).
 export const profile = {
-  email: 'midhunr2013@gmail.com',
+  email: 'midhunr2015@gmail.com',
   site: 'https://midhunrajeev.de/',
   yearsHandsOn: 5, // "more than five years of hands-on work" (CV, Aug 2026)
   calibrationCut: 80, // manual calibration effort cut at ITronic (CV, Aug 2026)
