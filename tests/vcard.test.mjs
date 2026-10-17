@@ -16,7 +16,7 @@ test('the vCard is a complete version 3.0 card with CRLF line endings', () => {
 test('the vCard carries the public contact details', () => {
   assert.ok(lines.includes('FN:Midhun Rajeev'));
   assert.ok(lines.includes('N:Rajeev;Midhun;;;'));
-  assert.ok(lines.some((line) => /^EMAIL[;:].*midhunr2013@gmail\.com$/.test(line)));
+  assert.ok(lines.some((line) => /^EMAIL[;:].*midhunr2015@gmail\.com$/.test(line)));
   assert.ok(lines.some((line) => /^URL[;:].*https:\/\/midhunrajeev\.de\/?$/.test(line)));
   assert.ok(lines.some((line) => line.includes('linkedin.com/in/midhun-rajeev1060')));
   assert.ok(lines.some((line) => line.includes('github.com/midhunr1996')));
