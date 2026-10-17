@@ -14,7 +14,7 @@ OUTPUT = Path(sys.argv[2] if len(sys.argv) > 2 else Path(__file__).parent.parent
 # Whole lines to remove, with optional replacement text drawn in their place.
 LINE_RULES = [
     (re.compile(r"Stra(ß|ss)e.*\d{5}"), "Landshut, Germany"),
-    (re.compile(r"\+49[\d ]{8,}"), "midhunr2013@gmail.com"),
+    (re.compile(r"\+49[\d ]{8,}"), "midhunr2015@gmail.com"),
     (re.compile(r"^Nationality"), None),
     (re.compile(r"^Date of birth"), None),
 ]
