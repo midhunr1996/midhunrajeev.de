@@ -23,6 +23,7 @@ WEBP_QUALITY = 80
 
 # (source, output name, max width, crop box or None)
 IMAGES = [
+    (RAW / "portrait.jpg", "midhun", 576, (0, 150, 576, 918)),  # About portrait, 3:4 (Oct 2026 photo)
     (RAW / "tb3_dashboard.png", "tb3-dashboard", 1280, None),
     (RAW / "tb3_architecture.png", "tb3-architecture", 1400, None),
     (LI / "labviewProteus/Picture1.jpg", "labview-panel", 1246, None),
