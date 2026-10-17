@@ -69,7 +69,8 @@ function initSearch(input, api) {
   });
   // "/" jumps to the search field, as on GitHub, unless the visitor is already typing somewhere.
   document.addEventListener('keydown', (event) => {
-    if (event.key !== '/' || event.target.closest('input, textarea, [contenteditable]')) return;
+    if (event.key !== '/' || event.ctrlKey || event.metaKey || event.altKey) return;
+    if (document.querySelector('dialog[open]') || event.target.closest('input, textarea, [contenteditable]')) return;
     event.preventDefault();
     input.focus();
   });

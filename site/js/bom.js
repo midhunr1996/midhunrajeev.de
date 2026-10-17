@@ -40,15 +40,16 @@ export function renderBom(table, groups, api) {
       const name = projectIds.length
         ? h('button', { type: 'button', text: part.part, onclick: () => api.filterByPart(part.part, projectIds) })
         : part.part;
+      const note = h('span', { class: 'visually-hidden' }); // spoken cue for the role mark
       const row = h(
         'tr',
         {},
         h('td', { class: 'bom__item', text: String(item) }),
-        h('th', { class: 'bom__part', scope: 'row' }, name),
+        h('th', { class: 'bom__part', scope: 'row' }, name, note),
         usedInCell(part.usedIn, api),
         h('td', { class: 'bom__qty', text: String(part.usedIn.length) }),
       );
-      rows.set(part.part, row);
+      rows.set(part.part, { row, note });
       body.append(row);
       item += 1;
     }
@@ -56,7 +57,11 @@ export function renderBom(table, groups, api) {
   }
   return {
     mark(role) {
-      for (const [name, row] of rows) row.classList.toggle('is-relevant', isRelevantPart(role, name));
+      for (const [name, { row, note }] of rows) {
+        const relevant = isRelevantPart(role, name);
+        row.classList.toggle('is-relevant', relevant);
+        note.textContent = relevant ? ' (relevant to the selected role)' : '';
+      }
     },
   };
 }

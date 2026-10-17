@@ -13,6 +13,10 @@ test('normalise lower-cases and keeps only letters, digits, plus and hash', () =
   assert.equal(normalise('C++ / C#'), 'c++ c#');
 });
 
+test('normalise keeps letters outside ASCII', () => {
+  assert.equal(normalise('Zürich Straße'), 'zürich straße');
+});
+
 test('an empty or blank query matches every project', () => {
   assert.equal(projectMatches(project, ''), true);
   assert.equal(projectMatches(project, '   '), true);

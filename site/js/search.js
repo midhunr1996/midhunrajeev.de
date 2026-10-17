@@ -1,8 +1,8 @@
 // Keyword search over projects. Pure functions, no DOM.
 
-/** Lower-case text keeping only letters, digits, "+" and "#" (so "C++" and "C#" survive), single-spaced. */
+/** Lower-case text keeping only letters (any script), digits, "+" and "#" (so "C++" and "C#" survive), single-spaced. */
 export function normalise(text) {
-  return String(text).toLowerCase().replace(/[^a-z0-9+#]+/g, ' ').trim();
+  return String(text).toLowerCase().replace(/[^\p{L}\p{N}+#]+/gu, ' ').trim();
 }
 
 /**

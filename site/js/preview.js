@@ -34,7 +34,10 @@ export function attachPreview(card, project, motionQuery) {
     timer = setTimeout(start, HOVER_DELAY_MS);
   });
   card.addEventListener('pointerleave', stop);
-  card.addEventListener('focusin', start);
+  // Keyboard focus starts the preview; focus returned by a closing dialog (not :focus-visible) does not.
+  card.addEventListener('focusin', (event) => {
+    if (event.target.matches(':focus-visible')) start();
+  });
   card.addEventListener('focusout', (event) => {
     if (!card.contains(event.relatedTarget)) stop();
   });

@@ -129,7 +129,7 @@
   margin-top: 1.2rem;
   border-bottom: var(--lw) solid var(--ink);
 }
-.find:focus-within { border-bottom-color: var(--redline); box-shadow: 0 1px 0 var(--redline); }
+.find:focus-within { border-bottom-color: var(--redline); box-shadow: 0 1px 0 var(--redline); outline: 2px solid var(--redline); outline-offset: 6px; }
 .find label { font-family: var(--font-letter); color: var(--ink-2); white-space: nowrap; }
 .find input {
   flex: 1;
@@ -224,6 +224,12 @@
 @media (prefers-reduced-motion: reduce) {
   .issue__stamp.is-stamped { animation: none; }
   .sheet-frame::before { animation: none; transform: none; display: none; }
+}
+
+@media (forced-colors: active) {
+  .bom tr.is-relevant .bom__part { border-left: 4px solid CanvasText; }
+  .issue__option[aria-pressed='true'],
+  .drive__toggle[aria-pressed='true'] { outline: 3px solid Highlight; }
 }
 
 @media print {

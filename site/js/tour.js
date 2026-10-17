@@ -30,7 +30,8 @@ export function createTour({ button, spans, cardFor, motionQuery, steps = tourSt
 
   function spotlight(element) {
     spotlit?.classList.remove('is-spotlit');
-    spotlit = element;
+    spotlit = element ?? null;
+    if (!element) return;
     element.classList.add('is-spotlit');
     element.scrollIntoView({ behavior: motionQuery?.matches ? 'auto' : 'smooth', block: 'center' });
   }
@@ -63,7 +64,7 @@ export function createTour({ button, spans, cardFor, motionQuery, steps = tourSt
   }
 
   function onKey(event) {
-    if (card.hidden || document.querySelector('dialog[open]')) return;
+    if (card.hidden || document.querySelector('dialog[open]') || event.target.closest('input, textarea')) return;
     if (event.key === 'Escape') {
       event.preventDefault();
       stop(true);

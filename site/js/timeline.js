@@ -71,7 +71,12 @@ export function renderTimeline(container, detail, { startYear, endYear, entries 
     // Flags the spans a role cares about (CSS draws the mark); pass nothing to clear.
     mark(ids) {
       const relevant = new Set(ids ?? []);
-      for (const [entryId, button] of buttons) button.classList.toggle('is-relevant', relevant.has(entryId));
+      for (const [entryId, button] of buttons) {
+        const isRelevant = relevant.has(entryId);
+        button.classList.toggle('is-relevant', isRelevant);
+        button.dataset.label ??= button.getAttribute('aria-label');
+        button.setAttribute('aria-label', isRelevant ? `${button.dataset.label}. Relevant to the selected role` : button.dataset.label);
+      }
     },
   };
 }

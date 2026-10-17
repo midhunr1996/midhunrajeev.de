@@ -2,6 +2,7 @@
 import { h } from './dom.js';
 import { projectMatches } from './search.js';
 import { attachPreview } from './preview.js';
+import { rankProjects } from './fit.js';
 
 const SWIPE_PX = 48;
 const thumbOf = (src) => src.replace(/\.webp$/, '-thumb.webp');
@@ -72,7 +73,7 @@ function renderViewer(media) {
     );
     let touchStart = null;
     main.addEventListener('pointerdown', (event) => {
-      if (event.pointerType === 'touch') touchStart = event.clientX;
+      if (event.pointerType === 'touch' && !event.target.closest('video')) touchStart = event.clientX;
     });
     main.addEventListener('pointerup', (event) => {
       if (touchStart === null) return;
@@ -109,6 +110,9 @@ export function createProjects({ projects, groups, grid, filtersEl, statusEl, di
   const cards = new Map();
   const filterButtons = new Map();
   let state = { group: 'all', part: null, query: '', role: null };
+  let viewerStep = null;
+  let returnFocusTo = null;
+  let pressedBackdrop = false;
 
   function renderCard(project) {
     const letter = letters.get(project.id);
@@ -154,11 +158,12 @@ export function createProjects({ projects, groups, grid, filtersEl, statusEl, di
 
   function applyFilter() {
     let visible = 0;
+    // Role projects come first, in the role's order. Cards are re-appended (not CSS-ordered) so tab order matches.
+    const ordered = state.role ? [...rankProjects(state.role, projects), ...projects.filter((project) => !state.role.projects.includes(project.id))] : projects;
+    if (ordered.some((project, i) => grid.children[i]?.dataset.id !== project.id)) grid.append(...ordered.map((project) => cards.get(project.id)));
     for (const project of projects) {
-      const card = cards.get(project.id);
       const show = isShown(project);
-      card.hidden = !show;
-      card.style.order = state.role ? String(state.role.projects.indexOf(project.id)) : '';
+      cards.get(project.id).hidden = !show;
       if (show) visible += 1;
     }
     for (const [id, button] of filterButtons) button.setAttribute('aria-pressed', String(!state.part && id === state.group));
@@ -192,6 +197,7 @@ export function createProjects({ projects, groups, grid, filtersEl, statusEl, di
   function showAll() {
     state = { group: 'all', part: null, query: '', role: null };
     applyFilter();
+    heading.focus({ preventScroll: true }); // the "Show all" button that had focus is gone now
     onShowAll?.();
   }
 
@@ -210,29 +216,33 @@ export function createProjects({ projects, groups, grid, filtersEl, statusEl, di
       ),
       h('div', { class: `dialog__content${viewer ? '' : ' dialog__content--text'}` }, viewer?.element ?? null, renderText(project)),
     );
-    dialog.viewerStep = viewer?.step ?? null;
+    viewerStep = viewer?.step ?? null;
     // Deep links open with nothing focused; send focus to the Projects heading on close instead of <body>.
     const active = document.activeElement;
-    dialog.returnFocusTo = opener ?? (active && active !== document.body ? active : heading);
+    returnFocusTo = opener ?? (active && active !== document.body ? active : heading);
     dialog.showModal();
     history.replaceState(null, '', `#project-${id}`);
   }
 
+  // Close on a backdrop click, but not when a text selection that started inside ends on the backdrop.
+  dialog.addEventListener('pointerdown', (event) => {
+    pressedBackdrop = event.target === dialog;
+  });
   dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
+    if (event.target === dialog && pressedBackdrop) dialog.close();
   });
   dialog.addEventListener('keydown', (event) => {
     // Arrow keys page through a gallery, unless a video has focus (its controls use them to seek).
-    if (!dialog.viewerStep || event.target.tagName === 'VIDEO') return;
+    if (!viewerStep || event.target.tagName === 'VIDEO') return;
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
       event.preventDefault();
-      dialog.viewerStep(event.key === 'ArrowRight' ? 1 : -1);
+      viewerStep(event.key === 'ArrowRight' ? 1 : -1);
     }
   });
   dialog.addEventListener('close', () => {
     dialog.querySelectorAll('video').forEach((video) => video.pause());
     history.replaceState(null, '', '#projects');
-    dialog.returnFocusTo?.focus?.({ preventScroll: true });
+    returnFocusTo?.focus?.({ preventScroll: true });
   });
 
   const counts = groups.map((group) => ({ ...group, count: projects.filter((p) => p.group === group.id).length }));
