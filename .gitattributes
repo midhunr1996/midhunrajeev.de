@@ -1,0 +1,11 @@
+* text=auto
+# vCard lines must end with CRLF (RFC 2426); keep them that way on every checkout, including CI.
+*.vcf text eol=crlf
+*.webp binary
+*.jpg binary
+*.png binary
+*.mp4 binary
+*.pdf binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
