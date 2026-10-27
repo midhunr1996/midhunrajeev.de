@@ -129,21 +129,6 @@ export const projects = [
     links: [{ label: 'Code on GitHub', href: 'https://github.com/midhunr1996/Human_following_Robot_Group7' }],
   },
   {
-    id: 'pipe-robot',
-    group: 'robotics',
-    title: 'Pipe-climbing inspection robot',
-    summary: 'Climbs vertical and horizontal pipe runs, driven from a phone over Wi-Fi.',
-    body: [
-      'A robot for industrial pipe inspection that travels vertical and horizontal runs across different diameters and materials. I designed the adaptive gripping mechanism that keeps contact force across diameters, and the multi-directional locomotion it drives.',
-      'I wrote both ends of the control link: an Android interface that sends movement and mode commands over Wi-Fi, and the ESP32 firmware that runs them and reports status back while the robot is out of sight. That meant dealing with latency, dropped packets and what the robot should do when the link degrades mid-manoeuvre.',
-    ],
-    facts: [],
-    tags: ['ESP32', 'C++', 'Wi-Fi', 'Android', 'Mechanism design', 'Embedded firmware'],
-    media: [vid('pipe-robot', 'Robot climbing inside a vertical pipe, controlled from a phone app', 'Climbing test, controlled from the phone app')],
-    links: [],
-    portrait: true,
-  },
-  {
     id: 'uv-robot',
     group: 'robotics',
     title: 'UV-C disinfection robot',
@@ -380,8 +365,8 @@ export const billOfMaterials = [
       { part: 'ROS / ROS 2', usedIn: ['object-tracking-robot', 'tb3-follower'] },
       { part: 'Sensor fusion', usedIn: ['object-tracking-robot', 'tb3-follower'] },
       { part: 'Behaviour trees, Gazebo', usedIn: ['tb3-follower'] },
-      { part: 'Mobile-robot control', usedIn: ['object-tracking-robot', 'tb3-follower', 'pipe-robot', 'uv-robot'] },
-      { part: 'Mechanism design', usedIn: ['pipe-robot', 'akbar-drive'] },
+      { part: 'Mobile-robot control', usedIn: ['object-tracking-robot', 'tb3-follower', 'uv-robot'] },
+      { part: 'Mechanism design', usedIn: ['akbar-drive'] },
     ],
   },
   {
@@ -397,7 +382,7 @@ export const billOfMaterials = [
   {
     group: 'Embedded and hardware',
     parts: [
-      { part: 'ESP32, Arduino', usedIn: ['pipe-robot', 'uv-robot', 'power-monitor', 'protocod'] },
+      { part: 'ESP32, Arduino', usedIn: ['uv-robot', 'power-monitor', 'protocod'] },
       { part: 'STM32, Raspberry Pi', usedIn: ['protocod', 'tea-leaf'] },
       { part: 'SPI, I2C, UART, CAN', usedIn: ['protocod', 'itronic', 'power-monitor'] },
       { part: 'Real-time firmware, calibration', usedIn: ['itronic'] },
@@ -409,7 +394,7 @@ export const billOfMaterials = [
     group: 'Software',
     parts: [
       { part: 'Python', usedIn: ['tb3-follower', 'mr-inspection', 'mitosis', 'nuclei-segmentation', 'roughness-ml', 'protocod'] },
-      { part: 'C, C++', usedIn: ['object-tracking-robot', 'pipe-robot', 'uv-robot', 'itronic', 'protocod'] },
+      { part: 'C, C++', usedIn: ['object-tracking-robot', 'uv-robot', 'itronic', 'protocod'] },
       { part: 'Lua', usedIn: ['akbar-drive', 'itronic'] },
       { part: 'JavaScript', usedIn: ['tea-leaf', 'verali', 'am-study', 'cps-study'] },
       { part: 'PyQt5 tools', usedIn: ['tb3-follower', 'mr-inspection'] },

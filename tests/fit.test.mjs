@@ -46,9 +46,9 @@ test('roleById returns the role or null', () => {
 });
 
 test('rankProjects returns project objects in the role order and skips unknown ids', () => {
-  const role = { ...roleById('embedded'), projects: ['uv-robot', 'missing', 'pipe-robot'] };
+  const role = { ...roleById('embedded'), projects: ['uv-robot', 'missing', 'power-monitor'] };
   const ranked = rankProjects(role, projects);
-  assert.deepEqual(ranked.map((project) => project.id), ['uv-robot', 'pipe-robot']);
+  assert.deepEqual(ranked.map((project) => project.id), ['uv-robot', 'power-monitor']);
 });
 
 test('isRelevantPart is true only for parts the role lists', () => {

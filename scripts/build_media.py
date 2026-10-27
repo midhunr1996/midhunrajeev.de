@@ -52,7 +52,6 @@ IMAGES = [
 VIDEOS = [
     (E / "akbar_explainer_full (2).mp4", "akbar-explainer", None, None, 9),
     (RAW / "tb3_realTesting.mp4", "tb3-real", None, None, 3),
-    (LI / "pipeClimbing.mp4", "pipe-robot", None, None, 0.6),
     (LI / "UV_sanitizingRob.mp4", "uv-robot", 72, 28, 13),
     (LI / "labviewProteus/Media2.mp4", "labview-demo", None, None, 10),
     (RAW / "verali_walkthrough.mp4", "verali-walkthrough", None, None, None),

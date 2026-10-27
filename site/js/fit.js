@@ -14,7 +14,7 @@ export const roles = [
       'Protocod: ESP32, STM32, Raspberry Pi and Arduino products from schematic and PCB layout through firmware to validation.',
       'SPI, I2C, UART and CAN interfaces, Wi-Fi, Bluetooth and LoRa links, and power management for battery-operated devices.',
     ],
-    projects: ['pipe-robot', 'uv-robot', 'power-monitor', 'tb3-follower'],
+    projects: ['uv-robot', 'power-monitor', 'tb3-follower', 'object-tracking-robot'],
     timeline: ['itronic', 'protocod'],
     parts: [
       'ESP32, Arduino',
@@ -38,7 +38,7 @@ export const roles = [
       'Object-tracking robot: modular ROS nodes, a depth camera fused with ultrasonic range, and a tracking loop tuned from measured error.',
       'M.Eng. in Mechatronic and Cyber-Physical Systems, focused on advanced robotics, autonomous systems and functional safety.',
     ],
-    projects: ['tb3-follower', 'object-tracking-robot', 'pipe-robot', 'uv-robot', 'akbar-drive'],
+    projects: ['tb3-follower', 'object-tracking-robot', 'uv-robot', 'akbar-drive'],
     timeline: ['meng', 'itronic'],
     parts: ['ROS / ROS 2', 'Sensor fusion', 'Behaviour trees, Gazebo', 'Mobile-robot control', 'YOLO detectors', 'Python', 'C, C++'],
   },
